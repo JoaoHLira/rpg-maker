@@ -1,6 +1,5 @@
 package br.com.lira.rpgmaker.cliente.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,13 +36,11 @@ public class Cliente {
 	@Column(unique = true)
 	private String email;
 
-
 	private LocalDateTime dataHoraCadastro;
 
 	public Cliente(@Valid ClienteRequest clienteRequest) {
 		this.nome = clienteRequest.getNome();
 		this.email = clienteRequest.getEmail();
 		this.dataHoraCadastro = LocalDateTime.now();
-		
 	}
 }
