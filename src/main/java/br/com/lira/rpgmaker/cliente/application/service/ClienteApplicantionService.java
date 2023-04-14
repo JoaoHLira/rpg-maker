@@ -1,7 +1,10 @@
 package br.com.lira.rpgmaker.cliente.application.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import br.com.lira.rpgmaker.cliente.application.api.ClienteListResponse;
 import br.com.lira.rpgmaker.cliente.application.api.ClienteRequest;
 import br.com.lira.rpgmaker.cliente.application.api.ClienteResponse;
 import br.com.lira.rpgmaker.cliente.application.repository.ClienteRepository;
@@ -24,5 +27,13 @@ public class ClienteApplicantionService implements ClienteService {
 		return ClienteResponse.builder()
 				.idCliente(cliente.getIdCliente())
 				.build();
+	}
+
+	@Override
+	public List<ClienteListResponse> buscaTodosClientes() {
+		log.info("[inicia] ClienteApplicantion - buscaTodosClientes");
+		List<Cliente> clientes = clienteRepository.buscaTodosClientes();
+		log.info("[finaliza] ClienteApplicantion - buscaTodosClientes");
+		return ClienteListResponse.converte(clientes);
 	}
 }
