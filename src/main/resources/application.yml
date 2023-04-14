@@ -1,3 +1,9 @@
 server:
  servlet:
     context-path: /rpg-maker/api
+
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_DB_URI:mongodb+srv://rpgMakerDevUser:JiJmsOro2W5BCSex@cluster0.eu9anjv.mongodb.net/?retryWrites=true&w=majority}
+      auto-index-creation: true

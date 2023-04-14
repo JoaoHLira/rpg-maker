@@ -12,9 +12,9 @@ import br.com.lira.rpgmaker.cliente.application.api.ClienteResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/cliente")
+@RequestMapping(value = "/v1/cliente")
 public interface ClienteAPI {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	ClienteResponse postCliente(@Valid @RequestBody ClienteRequest clienteRequest);
+	ClienteResponse postNovoCliente(@Valid @RequestBody ClienteRequest clienteRequest);
 }

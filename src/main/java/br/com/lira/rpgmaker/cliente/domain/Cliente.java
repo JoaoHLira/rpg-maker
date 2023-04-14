@@ -1,21 +1,28 @@
 package br.com.lira.rpgmaker.cliente.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import br.com.lira.rpgmaker.cliente.application.api.ClienteRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
 public class Cliente {
@@ -28,14 +35,16 @@ public class Cliente {
 	private String nome;
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
-	@NotNull
-	private LocalDate dataHoraCadastro;
 
-	public Cliente(@NotBlank String nome, @NotBlank @Email String email, @NotBlank String senha,
-			@NotNull LocalDate dataHoraCadastro) {
-		this.nome = nome;
-		this.email = email;
-		this.dataHoraCadastro = LocalDate.now();
+
+	private LocalDateTime dataHoraCadastro;
+
+	public Cliente(@Valid ClienteRequest clienteRequest) {
+		this.nome = clienteRequest.getNome();
+		this.email = clienteRequest.getEmail();
+		this.dataHoraCadastro = LocalDateTime.now();
+		
 	}
 }
